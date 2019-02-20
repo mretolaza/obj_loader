@@ -152,6 +152,28 @@ class Bitmap(object):
     def point(self, x, y):
         self.framebuffer[int(y)][int(x)] = self.newGlColor
 
+    def load(self, filename, translate=(0, 0), scale=(1, 1)):
+        model = Obj(filename)
+
+        for face in model.vfaces:
+            vcount = len(face)
+            for j in range(vcount):
+                f1 = face[j][0]
+                f2 = face[(j+1)%vcount][0]
+
+                v1 = model.vertices[f1 - 1]
+                v2 = model.vertices[f2 - 1]
+
+               # scaleX, scaleY = scale
+                #translateX, translateY = translate
+
+                x1 = v1[0]
+                y1 = v1[1] 
+                x2 = v2[0] 
+                y2 = v2[1] 
+        
+                self.line(x1, y1, x2, y2)
+
     def line (self, x1, y1, x2, y2): 
                 
         x1 = math.floor(self.getRXCoord(x1))
@@ -190,25 +212,3 @@ class Bitmap(object):
             if offset >= threshold: 
                 y += 1 if y1 < y2 else -1 
                 threshold += 1 * 2 * dx
-    
-    def load(self, filename, translate=(0, 0), scale=(1, 1)):
-        model = Obj(filename)
-
-        for face in model.vfaces:
-            vcount = len(face)
-            for j in range(vcount):
-                f1 = face[j][0]
-                f2 = face[(j+1)%vcount][0]
-
-                v1 = model.vertices[f1 - 1]
-                v2 = model.vertices[f2 - 1]
-
-                scaleX, scaleY = scale
-                translateX, translateY = translate
-
-                x1 = round((v1[0] + translateX) * scaleX)
-                y1 = round((v1[1] + translateY) * scaleY) 
-                x2 = round((v2[0] + translateX) * scaleX) 
-                y2 = round((v2[1] + translateY) * scaleY) 
-        
-                self.line(x1, y1, x2, y2)

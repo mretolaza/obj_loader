@@ -41,10 +41,10 @@ def glFinish():
     img.writeFile("render.bmp")
 
 def glLoadObj(filename): 
-    return img.load(filename)
+    img.load(filename)
 
 glCreateWindow(800,600)
-glViewPort(0,0,800,600)
+glViewPort(0,0,750,550)
 glClear()
 glColor(1, 1, 1)
 glVertex(0,0)
