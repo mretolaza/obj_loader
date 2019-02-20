@@ -41,12 +41,12 @@ def glFinish():
     img.writeFile("render.bmp")
 
 def glLoadObj(filename): 
-    img.load(filename)
+    return img.load(filename)
 
-glCreateWindow(1000,800)
-glViewPort(0,0,1000,800)
+glCreateWindow(800,600)
+glViewPort(0,0,800,600)
 glClear()
 glColor(1, 1, 1)
 glVertex(0,0)
-glLoadObj('chip.obj')
+glLoadObj('chip.obj') 
 glFinish()
